@@ -20,4 +20,4 @@ db_params = {
 }
 
 
-db : Database = MongoClient("mongodb+srv://fedislimen98:969xZIC88sT0q13R@cluster0.hxwzais.mongodb.net/")["API"]
+db : Database = MongoClient("mongodb+srv://fedislimen98:969xZIC88sT0q13R@cluster0.hxwzais.mongodb.net/")["API1"]
