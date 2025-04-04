@@ -39,25 +39,14 @@ def signup(user):
     new_user = dict(user)
     # Check if the email belongs to an admin and send a request email to the admin
     if new_user["provider"] == None :
-        if db["users"].count_documents({}) == 0:
-            with open("C:/Users/fedi/Desktop/Easink/user/avatar.png", "rb") as f:
-                img_data = f.read()
-            new_user["img_url"] = bson.binary.Binary(img_data)
-            # The collection is empty, so we can add the new user without further checks
-            response = db["users"].insert_one(new_user)
-            if response:
-                return {
-                    "message": "User added successfully !",
-                    "user_id": response.inserted_id,
-                }
-        else:
-            if db["users"].find_one({"email": new_user["email"]}):
-                raise HTTPException(status_code=409, detail="Email address already in use")
 
-            response = db["users"].insert_one(new_user)
+        if db["users"].find_one({"email": new_user["email"]}):
+            raise HTTPException(status_code=409, detail="Email address already in use")
 
-            if response:
-                return {
+        response = db["users"].insert_one(new_user)
+
+        if response:
+            return {
                     "message": "User added successfully !",
                     "user_id": response.inserted_id,
                 }
